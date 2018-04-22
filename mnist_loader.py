@@ -1,4 +1,7 @@
 """
+
+Author: Michael Nielsen 
+
 mnist_loader
 ~~~~~~~~~~~~
 
