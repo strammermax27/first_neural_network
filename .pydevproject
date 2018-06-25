@@ -2,4 +2,10 @@
 <?eclipse-pydev version="1.0"?><pydev_project>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python interpreter</pydev_property>
+
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>/home/daniel/miniconda2</path>
+<path>/home/daniel/.conda</path>
+<path>/home/daniel/miniconda2/lib/python2.7/site-packages</path>
+</pydev_pathproperty>
 </pydev_project>
