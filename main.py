@@ -2,9 +2,9 @@
 
 import datetime
 #from display_digits import Display
-import math
 import mnist_loader as loader
 #from numba import jit
+import numpy as np
 import pickle
 #import pprint
 from random import uniform, randint
@@ -427,10 +427,8 @@ class network():
         '''
 #@jit
 def sigmoid(x):
-    if x > 100:
-        x = 100
             
-    return 1. / (1. + math.exp(-float(x)))
+    return 1. / (1 + np.exp(-x))
 #@jit
 def deriv_sigmoid(x):     
     return sigmoid(x)*(1.-sigmoid(x))
@@ -532,17 +530,17 @@ def train_network():
     
     
     
-    batchsize = 1.0
+    batchsize = 10.0
     
-    eta = .02
+    eta = .2
     #input_manager.eta = eta
     #network = network()
-    batchruns = 0
+    batchruns = 1000
     
     total_cost = -1.
     current_delta_cost = []
-    print 'DEBUG: running algorythm once, showing al relevant data of a layer 2 neuron'
-    print 'neuron is layer2_neurons[3]'
+    #print 'DEBUG: running algorythm once, showing al relevant data of a layer 2 neuron'
+    #print 'neuron is layer2_neurons[3]'
     test_neuron = network.layer2_neurons[3]
     print 'start training'
     

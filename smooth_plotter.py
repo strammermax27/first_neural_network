@@ -9,7 +9,7 @@ import time
 from PIL.ImageFilter import SMOOTH
 
 
-
+graphs = []
 '''spec = [
     ('values', float32),               
     ('smooth_values', float32),        
@@ -110,7 +110,7 @@ def max_plt_points_update(val):
 
 #@jit
 def run():
-    global graphs
+    global graphs   
     global max_y
     global min_y
    
@@ -123,7 +123,7 @@ def run():
         max_y = 0
         min_y = 0
 
-        for graph in graphs:      #try to make this a jit loop
+        for graph in graphs:     
             graph.smooth_values = smooth_data(graph.values)
             
             
@@ -142,7 +142,7 @@ def run():
                 
             #print graph.smooth_values
           
-        time.sleep(10)
+        time.sleep(100)
         #print "tack"
         
 
@@ -169,7 +169,11 @@ def update(name, value):
         i += 1
     
     graph = graphs[index]
-    graph.values.append(value)
+    if type(value) == list:
+        for v in value:
+            graph.values.append(v)    
+    else:
+        graph.values.append(value)
     
     
     
