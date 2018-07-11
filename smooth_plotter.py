@@ -114,35 +114,35 @@ def run():
     global max_y
     global min_y
    
-    
+    #print 'run'
    
     
     
-    while 1:
+    #while 1:
 
-        max_y = 0
-        min_y = 0
+    max_y = 0
+    min_y = 0
 
-        for graph in graphs:     
-            graph.smooth_values = smooth_data(graph.values)
-            
-            
-            
-            
-            for value in graph.smooth_values:    
-                if max_y < value:
-                    max_y = float(value) + float(value) * 0.1
-                if min_y > value:
-                    min_y = value
+    for graph in graphs:     
+        graph.smooth_values = smooth_data(graph.values)
         
         
         
+        
+        for value in graph.smooth_values:    
+            if max_y < value:
+                max_y = float(value) + float(value) * 0.1
+            if min_y > value:
+                min_y = value
+    
+    
+    
         
         
                 
             #print graph.smooth_values
           
-        time.sleep(100)
+        #time.sleep(100)
         #print "tack"
         
 
@@ -187,6 +187,8 @@ def update(name, value):
     
     fig.canvas.draw()
     fig.canvas.flush_events()  
+    
+    run()
     
 #@jit    
 def smooth_data(values):
@@ -293,7 +295,7 @@ fig.canvas.flush_events()
 
 
 
-thread.start_new_thread(run, () )
+#thread.start_new_thread(run, () )
 print 4
 
 

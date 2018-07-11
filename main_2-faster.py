@@ -1,14 +1,7 @@
-import datetime
-from display_digits import Display
-import math
+#from display_digits import Display
 import mnist_loader as loader
-from numpy import array
 import numpy as np
 from numpy import random as np_random
-import pickle
-import pprint
-#from random import uniform, randint
-import thread
 import time
 
 
@@ -20,9 +13,9 @@ if plot_cost:
 #from statsmodels.tsa.interp.denton import indicator
 #from conda.core import index
 
-epochs = 120
+epochs = 300
 batchsize = 10
-eta = .2
+eta = 0.18
 
 n2, n3 = 16, 16 #neurons hidden layer1, neurons hidden layer2  
 
@@ -176,32 +169,68 @@ def run_training():
     global weights_hl3
     global weights_hl2     
     
+    #global eta
+    #etas = []    
     
+    #lowest_cost = 99    
+    #best_eta = 0   
     
     training_examples = len(actual_numbers)  
     
+    
+    
     if plot_cost:
         smooth_plotter.new_variable("cost", "b")      
-        cost = []
+        p_cost = []
+    current_cost = 0
+    #smooth_plotter.new_variable("eta", "g")    
     
     for i in range(epochs):
-        print "\n \n epoch: ", i        
+        print "\n \n epoch: ", i   
+        starttime = time.time() 
         for batch_index in range(0, training_examples, batchsize):
             
-            #print batch_index            
-            if plot_cost:
-                cost.append(calculate_errors(batch_index))
-            else:
-                calculate_errors(batch_index)
+            #print batch_index
+            
+            current_cost = calculate_errors(batch_index)
+            if plot_cost:    
+                p_cost.append(current_cost)
+            
+                
+                
+            calculate_errors(batch_index)
             
             gradient_descent()
         
-        if plot_cost:        
-            smooth_plotter.update("cost", cost)
-            cost = []
+            
+            
+            if plot_cost and batch_index%2000 == 0:        
+                smooth_plotter.update("cost", p_cost)
+                p_cost = []
+            
+            
+            #if current_cost < lowest_cost:
+            #    lowest_cost = current_cost
+            #    best_eta = eta
+            #    print "new best eta: ", eta
+                        
+            
+            #eta += eta * 0.00001
+            
+            #etas.append(eta)            
+            
+                    
         
+        print "time needed for epoch: ", time.time() - starttime
+        if plot_cost:        
+            smooth_plotter.update("cost", p_cost)
+            p_cost = []
+        #smooth_plotter.update("eta", etas)        
+                
+        #print "current eta: ", eta
         validate_network()
-                  
+    
+    #print "best eta: ", best_eta
             
 
     
