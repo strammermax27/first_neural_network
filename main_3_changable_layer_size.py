@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
+
 #from display_digits import Display
 import mnist_loader as loader
 import numpy as np
-from display_digits import Display
 from numpy import random as np_random
 import time
 
@@ -15,23 +16,36 @@ if plot_cost:
 #from conda.core import index
 
 epochs = 300
-batchsize = 1
+batchsize = 10
 eta = 0.28
 
-n2, n3 = 16, 16 #neurons hidden layer1, neurons hidden layer2  
 
+hidden_layers = [16, 16]
 
 handwritten_numbers, actual_numbers = loader.load_data()[0]
 validate_handwritten_numbers, validate_actual_numbers = loader.load_data()[1]
 
 
-hidden_layer2 = np_random.normal(0, 3, size=n2)
-hidden_layer3 = np_random.normal(0, 3, size=n3)
-output_layer =  np_random.normal(0, 3, size=10)
+#biases
+biases = []
+
+for layer_size in hidden_layers:
+    biases.append(np_random.normal(0, 3, size=layer_size))    
+    
+biases.append(np_random.normal(0, 3, size=10))
    
+   
+#wheigts
+wheigts= []
+
+for
+
 weights_hl2 = np_random.normal(0, 3, size=(len(hidden_layer2), len(handwritten_numbers[0])))
 weights_hl3 = np_random.normal(0, 3, size=(len(hidden_layer3), len(hidden_layer2)))
 weights_ol  = np_random.normal(0, 3, size=(len(output_layer), len(hidden_layer3)))
+
+
+
 
 errors_hl_2 = np.array([0.] * n2)
 errors_hl_3 = np.array([0.] * n3)
@@ -82,7 +96,6 @@ def calculate_errors(batch_index):
     for index in range(batch_index, batch_index + batchsize):
         
         picture = handwritten_numbers[index]
-#        display.draw_image(picture)        
         y = actual_numbers[index]
         
         #feedforward    
@@ -176,7 +189,7 @@ def run_training():
     #lowest_cost = 99    
     #best_eta = 0   
     
-    training_examples = len(actual_numbers)  
+    training_examples = 20#len(actual_numbers)  
     
     
     
@@ -205,7 +218,7 @@ def run_training():
         
             
             
-            if plot_cost and batch_index%5000 == 0:        
+            if plot_cost and batch_index%20 == 0:        
                 smooth_plotter.update("cost", p_cost)
                 p_cost = []
             
@@ -239,7 +252,7 @@ def validate_network():
     correct_numbers = 0
     false_numbers = 0
     
-    validation_runs = len(validate_actual_numbers)
+    validation_runs = 1000#len(validate_actual_numbers)
     
     
     print ''
@@ -298,8 +311,9 @@ def validate_network():
          
     
     
-#display = Display()
+
 run_training()     
+#display = Display()        
 #network = network()  
 #train_network()
 #validate_network()      

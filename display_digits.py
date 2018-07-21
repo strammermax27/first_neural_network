@@ -41,6 +41,22 @@ class Display():
 
         pygame.display.update()
         #pygame.time.wait(3000)
+    
+    def image_correct(self, correct):
+
+        global DISPLAYSURF
+        global FPSCLOCK
+        global BOXSIZE
+
+        if correct: 
+            DISPLAYSURF.fill((255,0,0))
+        else:
+            DISPLAYSURF.fill((255,0,0))
+
+        pygame.display.update()
+
+            
+            
 
     def display_data(self, data):
         pass

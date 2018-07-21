@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# this is not my code, i got it from a torch tuorial
 import numpy as np
 
 # N is batch size; D_in is input dimension;
